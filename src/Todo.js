@@ -1,4 +1,6 @@
 import React from "react";
+// eslint-disable-next-line
+import {ListItem, ListItemText, InputBase, Checkbox} from "@material-ui/core";
 
 // function Todo(){
 //     return (
@@ -22,15 +24,24 @@ class Todo extends React.Component {
     }
 
     render() {
+// eslint-disable-next-line
+        const item = this.state.item;
+
         return(
-            <div className="Todo">
-                {/* 자바스크립트로 된 변수를 JSX에서 사용하려면 변수를 {}로 묶어주면 된다. */}
-                <input type="checkbox" id={this.state.item.id}
-                       name={this.state.item.id}
-                       checked={this.state.item.done}
-                />
-                <label id={this.state.item.id}>{this.state.item.title}</label>
-            </div>
+            <ListItem>
+                <Checkbox checked={item.done}/>
+                <ListItemText>
+                    <InputBase
+                        inputProps={{'aria-label':'naked'}}
+                        type="text"
+                        id={item.id}
+                        name={item.id}
+                        value={item.title}
+                        multiline={true}
+                        fullWidth={true}
+                    />
+                </ListItemText>
+            </ListItem>
         );
     }
 }
