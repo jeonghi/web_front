@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import Todo from "./Todo";
@@ -30,10 +29,24 @@ import Todo from "./Todo";
 //js파일안에 js문법과 html코드를 사용하고 있다. 이는 리엑트가 한 파일에서 HTML과 js를 함께 쓰려고 확장한 문법이고 JSX라고 부른다.
 //App 컴포넌트의 클래스 버전이다.
 class App extends React.Component {
-  render(){
-    return (
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            items: [
+                {id: 0, title: "위장마스터 세윤", done:true},
+                {id: 1, title: "뿡쟁이 정환", done:false}
+            ]
+        };
+    }
+
+    render(){
+        var todoItems = this.state.items.map( (item, idx) => {
+            return <Todo item={item} key={item.id}/>
+        })
+        return (
         <div className="App">
-            <Todo/>
+            {todoItems}
         </div>
     )
   }
