@@ -1,6 +1,8 @@
 import './App.css';
 import React from 'react';
 import Todo from "./Todo";
+// eslint-disable-next-line
+import {Paper, List} from "@material-ui/core";
 
 //App은 컴포넌트이다.
 //컴포넌트는 js함수 또는 js클래스 형태로 생성할 수 있다.
@@ -41,9 +43,17 @@ class App extends React.Component {
     }
 
     render(){
-        var todoItems = this.state.items.map( (item, idx) => {
-            return <Todo item={item} key={item.id}/>
-        })
+        const items = this.state.items;
+        var todoItems = items.length > 0 && (
+            <Paper style={{margin: 16}}>
+                <List>
+                    {items.map((item, idx) => {
+                        return <Todo item={item}/>}
+                    )}
+                </List>
+            </Paper>
+
+        )
         return (
         <div className="App">
             {todoItems}
