@@ -5,6 +5,7 @@ class AddTodo extends React.Component {
     constructor(props) {
         super(props);
         this.state = { item: { title: "" }};
+        this.add = props.add;
     }
 
     onInputChange = (e) => {
@@ -13,6 +14,12 @@ class AddTodo extends React.Component {
         // setState 는 state를 변경시켜주는 함수 이다.
         this.setState({item: thisItem});
         console.log(thisItem);
+    }
+
+    onButtonClick = () => {
+        const thisItem = this.state.item;
+        this.add(thisItem);
+        this.setState({item: {title: ""}});
     }
 
     render() {
@@ -35,7 +42,10 @@ class AddTodo extends React.Component {
                         />
                     </Grid>
                     <Grid xs={1} md={1} item>
-                        <Button fullWidth color="secondary" variant="outlined">
+                        <Button fullWidth color="secondary"
+                                variant="outlined"
+                                onClick={this.onButtonClick}
+                        >
                             +
                         </Button>
                     </Grid>
