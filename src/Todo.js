@@ -22,6 +22,11 @@ class Todo extends React.Component {
         // 리엑트가 변경된 state를 어떻게 다시 렌더링 하는지는 이후 setState에서 다룬다.
 
         this.state = { item: props.item };
+        this.delete = props.delete;
+    }
+
+    deleteEventHandler = () => {
+        this.delete(this.state.item)
     }
 
     render() {
@@ -43,7 +48,8 @@ class Todo extends React.Component {
                     />
                 </ListItemText>
                 <ListItemSecondaryAction>
-                    <IconButton aria-label="Delete Todo">
+                    <IconButton aria-label="Delete Todo"
+                    onClick={this.deleteEventHandler}>
                         <DeleteOutlined />
                     </IconButton>
                 </ListItemSecondaryAction>

@@ -53,13 +53,23 @@ class App extends React.Component {
         console.log("items: ", this.state.items);
     }
 
+    delete = (item) => {
+        const thisItems = this.state.items;
+        console.log("Before update Items : ", this.state.items)
+        const newItems = thisItems.filter((e) => {return e.id !== item.id});
+        this.setState({ items: newItems }, () => {
+            console.log("Update Items : ", this.state.items)
+        })
+    }
+
+
     render(){
         const items = this.state.items;
         var todoItems = items.length > 0 && (
             <Paper style={{margin: 16}}>
                 <List>
                     {items.map((item, idx) => {
-                        return <Todo item={item}/>}
+                        return <Todo item={item} delete={this.delete}/>}
                     )}
                 </List>
             </Paper>
