@@ -49,13 +49,25 @@ class Todo extends React.Component {
         }
     }
 
+    editEventHandler = (e) => {
+        const thisItem = this.state.item;
+        thisItem.title = e.target.value;
+        this.setState({item: thisItem});
+    }
+
+    checkboxEventHandler = (e) => {
+        const thisItem = this.state.item;
+        thisItem.done = !thisItem.done;
+        this.setState({item: thisItem});
+    }
+
     render() {
 // eslint-disable-next-line
         const item = this.state.item;
 
         return(
             <ListItem>
-                <Checkbox checked={item.done}/>
+                <Checkbox checked={item.done} onChange={this.checkboxEventHandler}/>
                 <ListItemText>
                     <InputBase
                         inputProps={{'aria-label':'naked',
@@ -68,6 +80,7 @@ class Todo extends React.Component {
                         fullWidth={true}
                         onClick={this.offReadOnlyMode}
                         onKeyPress={this.onKeyPress}
+                        onChange={this.editEventHandler}
                     />
                 </ListItemText>
                 <ListItemSecondaryAction>
