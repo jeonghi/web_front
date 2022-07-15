@@ -21,12 +21,32 @@ class Todo extends React.Component {
         // 그 이유는 js 내에서 변경한 변수의 값을 HTML에 다시 렌더링 하기 위함이다.
         // 리엑트가 변경된 state를 어떻게 다시 렌더링 하는지는 이후 setState에서 다룬다.
 
-        this.state = { item: props.item };
+        this.state = { item: props.item , readOnly: true };
         this.delete = props.delete;
     }
 
     deleteEventHandler = () => {
         this.delete(this.state.item)
+    }
+
+    offReadOnlyMode = () => {
+        console.log("Event!", this.state.readOnly)
+        this.setState({readOnly: false}, () => {
+            console.log("ReadOnly?", this.state.readOnly)
+        })
+    }
+
+    onReadOnlyMode = () => {
+        console.log("Event!", this.state.readOnly)
+        this.setState({readOnly: true}, () => {
+            console.log("ReadOnly?", this.state.readOnly)
+        })
+    }
+
+    onKeyPress = (e) => {
+        if(e.key === "Enter"){
+            this.onReadOnlyMode();
+        }
     }
 
     render() {
@@ -38,13 +58,16 @@ class Todo extends React.Component {
                 <Checkbox checked={item.done}/>
                 <ListItemText>
                     <InputBase
-                        inputProps={{'aria-label':'naked'}}
+                        inputProps={{'aria-label':'naked',
+                        readOnly: this.state.readOnly,}}
                         type="text"
                         id={item.id}
                         name={item.id}
                         value={item.title}
                         multiline={true}
                         fullWidth={true}
+                        onClick={this.offReadOnlyMode}
+                        onKeyPress={this.onKeyPress}
                     />
                 </ListItemText>
                 <ListItemSecondaryAction>
