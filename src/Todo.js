@@ -1,6 +1,7 @@
 import React from "react";
 // eslint-disable-next-line
-import {ListItem, ListItemText, InputBase, Checkbox} from "@material-ui/core";
+import {ListItem, ListItemText, InputBase, Checkbox, ListItemSecondaryAction, IconButton} from "@material-ui/core";
+import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
 
 // function Todo(){
 //     return (
@@ -41,6 +42,11 @@ class Todo extends React.Component {
                         fullWidth={true}
                     />
                 </ListItemText>
+                <ListItemSecondaryAction>
+                    <IconButton aria-label="Delete Todo">
+                        <DeleteOutlined />
+                    </IconButton>
+                </ListItemSecondaryAction>
             </ListItem>
         );
     }
